@@ -4,6 +4,7 @@ import com.gestion.leave_management_system.model.Employee;
 import com.gestion.leave_management_system.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +24,18 @@ public class EmployeeController {
     public List<Employee> getEmployees() {
         return employeeService.getAllEmployees();
     }
+
+    @GetMapping("/employees/{id}")
+    public Employee getEmployeeById(@PathVariable Long id) {
+        return employeeService.getEmployeeById(id);
+}
     
     @PostMapping("/employees")
     public Employee createEmployee(@RequestBody Employee employee) {
         
         return employeeService.createEmployee(employee);
     }
+
+    
 
 }
