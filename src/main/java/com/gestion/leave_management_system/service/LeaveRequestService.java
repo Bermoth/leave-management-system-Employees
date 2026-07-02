@@ -7,7 +7,7 @@ import com.gestion.leave_management_system.repository.LeaveRequestRepository;
 import com.gestion.leave_management_system.repository.EmployeeRepository;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.stereotype.Service;
 
@@ -49,5 +49,15 @@ public class LeaveRequestService {
         }
         leave.setStatus(LeaveStatus.valueOf(status.toUpperCase()));
         return leaveRequestRepository.save(leave);
+    }
+
+    public void deleteLeave(Long id) {
+        LeaveRequest leave = leaveRequestRepository.findById(id).orElse(null);
+
+        if (leave == null) {
+            throw new RuntimeException("Leave request not found with id "+ id);
+        }
+        leaveRequestRepository.delete(leave);
+
     }
 }
